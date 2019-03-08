@@ -28,9 +28,7 @@ navbar-links:
     - Basics: "aboutUVAFME"
     - How to Run: "howtorun"
     - Ongoing Research: "ongoingWork"
-    - Details about the Model:
-      - Structure: "modelDescription"
-      - Climate: "climate"
+    - Details about the Model: "modelDescription"
   Resources:
     - Learn Fortran: "https://en.wikibooks.org/wiki/Fortran"
     - About SLURM: "https://slurm.schedmd.com/"
