@@ -27,12 +27,13 @@ navbar-links:
   About UVAFME:
     - Basics: "aboutUVAFME"
     - How to Run: "howtorun"
-    - Ongoing Research: "ongoingWork"
     - Details about the Model: "modelDescription"
+    - Ongoing Research: "ongoingWork"
   Resources:
     - Learn Fortran: "https://en.wikibooks.org/wiki/Fortran"
     - About SLURM: "https://slurm.schedmd.com/"
   Download: "https://github.com/UVAFME/UVAFME_model"
+  Contact: "contactUs"
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
