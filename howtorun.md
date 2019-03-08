@@ -70,7 +70,7 @@ This script can be modified by adding a loop which distributes several jobs (i.e
 
 The _UVAFME2018_runtime.txt_ file sets up runtime parameters which are the same across all sites set up in the _UVAFME2018_sitelist.csv_ file. Such parameters include how many plots to simulate per site and their size, the number of years to run the simulations, as well as parameters for implementing climate change. The runtime file is a Fortran namelist file, thus the parameter names in the input runtime file must match the parameter names set up inside the model or an I/O error will occur, and the default values for all subsequent parameters will be used.
 
-![RuntimeFile](img/UVAFME_cycle.png)
+![RuntimeFile](img/UVAFME_Runtime.png)
 
 ### Sitelist File
 
