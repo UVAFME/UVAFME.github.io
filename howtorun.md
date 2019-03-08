@@ -4,7 +4,7 @@ title: How to run UVAFME
 subtitle: How to run UVAFME interactively or in batch
 ---
 
-UVAFME is written in Fortran(90), and can be run on a Linux platform, and easily compiled on a Linux system with the ([ifort](https://software.intel.com/en-us/fortran-compilers)) compiler. Each site simulated in UVAFME is independent from other sites. Thus, when simulating multiple sites, UVAFME runs them in succession. This setup means that UVAFME simulations may be run "interactively" (i.e. from an active command line session), or distributed across several linux nodes via a job manager such as SLURM.
+UVAFME is written in Fortran(90), and can be run on a Linux platform, and easily compiled on a Linux system with the [ifort](https://software.intel.com/en-us/fortran-compilers) compiler. Each site simulated in UVAFME is independent from other sites. Thus, when simulating multiple sites, UVAFME runs them in succession. This setup means that UVAFME simulations may be run "interactively" (i.e. from an active command line session), or distributed across several linux nodes via a job manager such as SLURM.
 
 ## Files Needed for Running UVAFME
 
