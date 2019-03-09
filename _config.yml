@@ -28,7 +28,7 @@ navbar-links:
     - Basics: "aboutUVAFME"
     - How to Run: "howtorun"
     - Details about the Model: "modelDescription"
-    - Ongoing Research: "ongoingWork"
+   # - Ongoing Research: "ongoingWork"
   Resources:
     - Learn Fortran: "https://en.wikibooks.org/wiki/Fortran"
     - About SLURM: "https://slurm.schedmd.com/"
