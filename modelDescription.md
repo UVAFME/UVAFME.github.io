@@ -28,38 +28,38 @@ Climate in UVAFME is simulated through input distributions of monthly temperatur
 
 The monthly simulated weather data are used to generate daily values for each simulation year using a Gaussian approach for temperature and cloud cover. To generate daily precipitation values, the monthly precipitation is used to calculate the number of days it rains that month, and the amount of rainfall for each rain day. Monthly rain days are distributed randomly across the days in the month until all rain days have been filled.
 
-## Climate Change
+### Climate Change
 Climate change can be prescribed either linearly or via an input climate change file. Climate change, in the form of changing mean monthly temperatures and precipitation, is achieved by modifying the input values of average monthly minimum and maximum temperatures  and precipitation for a simulated site. Currently, all cloudiness variables and all monthly standard deviations do not change from the historical inputs during the climate change application.
 
-## Altitudinal Change
+### Altitudinal Change
 Often it is beneficial to run the model at the same site latitude and longitude, but at different elevations (such as in studies in complex terrain for for testing applications). Both temperature and precipitation change as altitude/elevation changes. These changes can be generated in UVAFME using input values of the base site elevation, the new elevation (i.e. altitude), and temperature and precipitation lapse rates. As with climate change, these modifications are made to the initial input average minimum and maximum temperatures and precipitation for a particular site.
 
-## Solar Radiation
+### Solar Radiation
 Daily and annual solar radiation is used to calculate potential evapotranspiration (PET) and permafrost dynamics (if present) within UVAFME. Previous versions of the model used top-of-atmosphere solar radiation to derive PET, however as of Version 3, surface solar radiation is used to account for the effects of slope, aspect, and cloud cover on solar radiation received at a surface.
 
-## Potential Evapotranspiration
+### Potential Evapotranspiration
 In previous versions of UVAFME, top-of-atmosphere radiation was used to calculate potential evapotranspiration (PET) using Hargreave's evaporation formula, however, studies have shown this equation to overestimate PET at high latitudes. In this version of the model, the formulation for PET was updated to use a modified Priestley-Taylor equation which uses surface solar radiation, allowing for the incorporation of topographic effects on PET.
 
 # Soil Processes <a name="soil"></a>
 
 ![ForestFloor](img/forest_floor.jpg)
 
-## Soil Water
+### Soil Water
 
 Soil water balance in UVAFME is partitioned into two layers, a moss-organic layer containing a mixture of moss, humus, and litter, and a mineral layer. Outputs are aggregated over the year to influence yearly tree growth. Using this simple model allows for relatively little inputs: slope, canopy LAI, organic layer depth, drainage quality, soil texture, PET, and precipitation. These inputs are received from site input variables, the tree Canopy module, the soil nutrient submodel, and the Climate module.
 
 As of Version 3 of UVAFME permafrost depth effects on soil moisture dynamics are also incorporated (if permafrost is present) using equations adapted from [Bonan (1989)](https://www.sciencedirect.com/science/article/pii/0304380089900768). Each day in the simulation, soil moisture is partitioned into liquid and frozen water in each soil layer, based on the calculation of depths of freezing and thawing in the permafrost submodel.  For areas with continuous or discontinuous permafrost, it is assumed that the moss-organic and mineral layers are above field capacity at the beginning of each year. This effect of near-saturated conditions on moisture dynamics is implemented via drainage condition variables, which are set up at the beginning of each simulation year, based on the previous' years maximum depth of thaw.
 
-## Soil and Litter Decomposition
+### Soil and Litter Decomposition
 
 In previous versions of UVAFME, any trees that died and all annual litterfall were added to site-wide pools of C and N, regardless of litter type (i.e. boles, leaves, etc.) or species. These C and N amounts along with temperature and soil moisture were used to calculate soil respiration and plant-available nitrogen. As of UVAFME Version 3,  the model allows for fine-scale interactions between climate, soils, vegetation, and disturbances through explicit tracking and decomposition of individual forest litter "cohorts" based on equations adapted from [Bonan (1990)](https://link.springer.com/article/10.1007/BF00000889) and [Pastor and Post (1985)](https://www.researchgate.net/publication/236392775_Development_of_a_linked_forest_productivity-soil_process_model). Within the simulation, any litter from branch thinning, annual leaf-off, or tree mortality is added to a litter array along with moss litter, depending on its type and genus (for leaf litter). Litter is accumulated within the array throughout each simulation year and decomposed the following year depending on
 litter and site characteristics.
 
-## Permafrost
+### Permafrost
 
 The daily depths of freeze and thaw are calculated in the permafrost subroutine using the Stefan equation as in [Bonan (1989)](https://www.sciencedirect.com/science/article/pii/0304380089900768), by determining the required number of monthly cumulative degree-days to freeze or thaw each soil layer completely, and the actual number of available monthly degree-days for freezing/thawing, which are modified via topographic and forest cover factors. The annual maximum depth of thaw is used to impact individual tree growth each year based on species-specific permafrost tolerance.
 
-# Moss <a name="moss"></a>
+## Moss <a name="moss"></a>
 
 Moss growth and decay is calculated as in [Bonan and Korzukhin 1989](https://www.jstor.org/stable/20038509?seq=1#metadata_info_tab_contents), where moss growth is modeled as the difference between carbon assimilation and decay/respiration. Carbon assimilation is assumed to be proportional to maximum moss biomass reported for the simulation region, and is modified based on plot conditions such as light conditions, soil moisture, and tree litterfall.
 
@@ -67,7 +67,7 @@ Moss growth and decay is calculated as in [Bonan and Korzukhin 1989](https://www
 
 ![Allometry](img/UVAFME_TGrowth.png)
 
-## Tree Allometry
+### Tree Allometry
 
 Tree growth in UVAFME is modeled annually as diameter increment growth, based on first simulating optimal diameter increment growth and subsequently modifying that optimal growth based on environmental conditions and species- and tree size-specific tolerances. Each year the updated diameter is used to calculate other tree characteristics such as height, leaf area, and biomass, using allometric equations.
 
@@ -75,7 +75,7 @@ Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https
 
  In UVAFME, clear branch bole height is not calculated allometrically but set to an initial value (1.0 m) when a tree is first initialized and then allowed to increase annually (or not) via lower branch thinning. Wood volume (i.e. biomass) is calculated assuming the bole shape is a simple cone. This volume is then multiplied by the bulk density of the wood (a species-specific input parameter) and divided by 2 to derive biomass in tonnes of C. The lateral root volume is assumed to be half of the branch volume, and the root ball volume is calculated by assuming a cone at DBH height downwards to the root depth.
 
-## Annual Growth
+### Annual Growth
 
  Annual tree growth is simulated using the above allometric equations for growth, modified by the current environmental conditions on the plot as well as species- and tree size-specific tolerances. Optimal diameter increment growth (via equation \ref{opt}) is decremented based on soil moisture, temperature, light conditions, nutrient availability, and permafrost conditions (if present). For each of these potential stressors, growth factors are calculated (0 to 1) on a species- and tree-level basis and used to decrement the optimal growth of each tree to derive actual diameter increment growth. For a given plot on a given year, the environmental conditions determine how well each individual tree grows that year. Thus, trees of differing species and sizes will respond differently each year and can compete with one another for resources.
 
@@ -100,7 +100,7 @@ Annual establishment of new trees in UVAFME is based on the species-specific see
 
 Trees in UVAFME are located on a grid (generally 30x30). Currently, trees within the same plot interact spatially with one another with respect to insect infestation. When a new tree is established, its x/y location on the grid is drawn randomly from the set of empty grid spaces on the plot. The tree then carries this same grid cell location throughout its lifetime until its death, at which point that grid cell is once again empty.
 
-# Further Reading and Citations
+### Further Reading and Citations
 
 1. Bonan, G. . 1989. A computer model of the solar radiation, soil moisture, and soil thermal regimes in boreal forests. Ecological Modelling 45:275–306.
 2. Bonan, G. B. 1990. Carbon and nitrogen cycling in North American boreal forests I. Litter quality and soil thermal effects in interior Alaska. Biogeochemistry 10:1–28.
