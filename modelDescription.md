@@ -3,7 +3,16 @@ layout: page
 title: Details about UVAFME
 ---
 
-# Scale and Spatial Interaction
+# Jump to a specific topic
+1. [Scale and Spatial Interaction](#scale)
+2. [Climate](#climate)
+3. [Soil Processes](#soil)
+4. [Moss](#moss)
+5. [Tree Growth](#tgrowth)
+6. [Tree Mortality](#tmort)
+7. [Tree Regeneration](#regen)
+
+# Scale and Spatial Interaction <a name="scale"></a>
 
 Currently, UVAFME sites do not interact with one another and thus may be run in parallel or in sequence. Within a site, several hundred (generally 200) independent plots about the area of influence of a dominant tree crown (e.g. 500 m<sup>2</sup>) are simulated that represent patches of a forested landscape. Forest "landscape" in this context is defined as a dynamic mosaic of forest gaps (i.e. patches/plots) (see [Shugart and Seagle 1985](https://www.researchgate.net/publication/282756658_Modeling_Forest_Landscapes_and_the_Role_of_Disturbance_in_Ecosystems_and_Communities)). Within each patch, gap dynamics play out through the establishment of new trees following some major disturbance, growth and competition between trees to fill in the gap,  eventual dominance or co-dominance of a few trees, and death of such canopy dominants, which starts the cycle anew. Within UVAFME, the plots do not interact with one another, and thus represent independent replicates of potential forest dynamics occurring at a location with input environmental and climatological conditions. Due to the stochastic factors within UVAFME (i.e. disturbances, mortality, and regeneration), each plot will contain a forest patch undergoing some gap dynamics process, driven by both deterministic processes (e.g. tree growth response to external factors) and stochastic factors. A Monte Carlo-style average of such plots thus represents average, non-spatially explicit, per area *expected* forested conditions for the site location. This aggregation also produces emergent properties at the landscape scale (i.e. the average of several hundred gaps) such as forest succession, cyclical effects, and response to shifting climate and disturbance regimes.
 
@@ -13,7 +22,7 @@ Climate and daily weather conditions in UVAFME are the same across all plots wit
 
 ![ClimMount](img/mountain_forest.jpg)
 
-# Climate
+# Climate <a name="climate"></a>
 
 Climate in UVAFME is simulated through input distributions of monthly temperature (ºC), precipitation (cm), and cloud cover (tenths of sky covered). The average monthly minimum and maximum temperatures, precipitation, and cloud cover, as well as standard deviations for these values (generally derived from at least 30 years of historical climate data) are used to create a range of possible values for a site in question. These monthly values are generated anew for each year of the simulation on each site and are equal across all plots within a site.
 
@@ -33,7 +42,7 @@ In previous versions of UVAFME, top-of-atmosphere radiation was used to calculat
 
 ![ForestFloor](img/forest_floor.jpg)
 
-# Soil Processes
+# Soil Processes <a name="soil"></a>
 
 ## Soil Water
 
@@ -50,13 +59,13 @@ litter and site characteristics.
 
 The daily depths of freeze and thaw are calculated in the permafrost subroutine using the Stefan equation as in [Bonan (1989)](https://www.sciencedirect.com/science/article/pii/0304380089900768), by determining the required number of monthly cumulative degree-days to freeze or thaw each soil layer completely, and the actual number of available monthly degree-days for freezing/thawing, which are modified via topographic and forest cover factors. The annual maximum depth of thaw is used to impact individual tree growth each year based on species-specific permafrost tolerance.
 
-# Moss
+# Moss <a name="moss"></a>
 
 Moss growth and decay is calculated as in [Bonan and Korzukhin 1989](https://www.jstor.org/stable/20038509?seq=1#metadata_info_tab_contents), where moss growth is modeled as the difference between carbon assimilation and decay/respiration. Carbon assimilation is assumed to be proportional to maximum moss biomass reported for the simulation region, and is modified based on plot conditions such as light conditions, soil moisture, and tree litterfall.
 
 ![Allometry](img/UVAFME_TGrowth.png)
 
-# Tree Growth
+# Tree Growth <a name="tgrowth"></a>
 
 ## Tree Allometry
 
@@ -72,7 +81,7 @@ Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https
 
 ![TreeMortality](img/forest_mortality.jpg)
 
-# Tree Mortality
+# Tree Mortality <a name="tmort"></a>
 
 Trees in UVAFME may die from stress- or age-related factors or from disturbances by wildfire, windthrow, and [bark beetles](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.2437). Growth stress-related mortality is calculated via prolonged low diameter increment growth. Trees also have a chance of dying each year based on the input species-specific probability of reaching its maximum age.
 
@@ -80,12 +89,25 @@ Each plot run for a specific site has a probability of fire or windthrow occurri
 
 If a windthrow event occurs on the plot, probability of windthrow mortality of each individual tree on the plot is based on tree size. UVAFME is also able to simulate mortality from the spruce beetle (*Dendroctonus rufipennis* (Kirby)), a bark beetle which infests spruce *Picea spp.* species. Mortality is simulated as the probability of infestation of each host tree based on climate-, site-, and tree-level characteristics [(Foster et al. 2018)](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.2437).
 
-## Litter
+### Litter
 Trees that die and any annual litter is placed in appropriate genus- and litter type-specific litter cohorts for decomposition. Leaf litter biomass is added to a genus-specific annual litter pool, and twig litter and root litter are added to a twig litter and root litter pool, respectively. Tree boles are separated into small bole litter (DBH < 10 cm) and large bole litter (DBH > 10 cm). If a fire occurs on the plot the litter and humus layers are also consumed, depending on litter and site moisture conditions.
 
 ![TreeRegen](img/forest_seedlings.jpg)
 
-# Tree Regeneration
+# Tree Regeneration <a name="regen"></a>
 Annual establishment of new trees in UVAFME is based on the species-specific seed and seedling banks on each plot as well as the current environmental conditions and species-specific tolerances. Similar to other gap models, the species of each new tree established is stochastic, weighted by each species' ability to survive in the current plot's environment. The seedbank and seedling bank of each species is additionally modified to account for seeding strategies (i.e. serotiny, sprouting etc.) and natural mortality of seeds and seedlings.
 
 Trees in UVAFME are located on a grid (generally 30x30). Currently, trees within the same plot interact spatially with one another with respect to insect infestation. When a new tree is established, its x/y location on the grid is drawn randomly from the set of empty grid spaces on the plot. The tree then carries this same grid cell location throughout its lifetime until its death, at which point that grid cell is once again empty.
+
+# Further Reading and Citations
+
+1. Bonan, G. . 1989. A computer model of the solar radiation, soil moisture, and soil thermal regimes in boreal forests. Ecological Modelling 45:275–306.
+2. Bonan, G. B. 1990. Carbon and nitrogen cycling in North American boreal forests I. Litter quality and soil thermal effects in interior Alaska. Biogeochemistry 10:1–28.
+3. Bonan, G. B., and M. D. Korzukhin. 1989. Simulation of moss and tree dynamics in the boreal forests of interior Alaska. Vegetatio 84:31–44.
+4. Botkin, D. B., J. F. Janak, and J. R. Wallis. 1972. Some Ecological Consequences of a Computer Model of Forest Growth. The Journal of Ecology 60:849.
+5. Foster, A. C., J. K. Shuman, H. H. Shugart, and J. Negron. 2018. Modeling the interactive effects of spruce beetle infestation and climate on subalpine vegetation. Ecosphere 9:e02437.
+6. Leemans, R., and I. C. Prentice. 1989. FORSKA, a general forest succession model. Institute of Ecological Botany, Uppsala, Sweden.
+7. Pastor, J., and W. M. Post. 1985. Development of a linked forest productivity-soil process model. Page 108. Environmental Sciences Division Publication, USDA, Oak Ridge National Laboratory.
+8. Shinozaki, K., K. Yoda, K. Hozumi, and T. Kira. 1964. A quantitative analysis of plant form - the pipe model theory. I. Basic analysis. Japanese Journal of Ecology 14:19–105.
+9. Shugart, H. H., and S. W. Seagle. 1985. Modeling forest landscapes and the role of disturbance in ecosystems and communities. Pages 353–368 in S. T. A. Pickett and P. S. White, editors. The Ecology of Natural Disturbance and Patch Dynamics. Elsevier.
+Yan, X., and H. H. Shugart. 2005. FAREAST: a forest gap model to simulate dynamics and patterns of eastern Eurasian forests: Simulation of eastern Eurasian forests. Journal of Biogeography 32:1641–1658.
