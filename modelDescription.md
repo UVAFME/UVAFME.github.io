@@ -58,6 +58,14 @@ Moss growth and decay is calculated as in [Bonan and Korzukhin 1989](https://www
 
 # Tree Growth
 
+## Tree Allometry
+
 Tree growth in UVAFME is modeled annually as diameter increment growth, based on first simulating optimal diameter increment growth and subsequently modifying that optimal growth based on environmental conditions and species- and tree size-specific tolerances. Each year the updated diameter is used to calculate other tree characteristics such as height, leaf area, and biomass, using allometric equations.
 
-Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https://www.jstor.org/stable/2258570?seq=1#metadata_info_tab_contents).
+Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https://www.jstor.org/stable/2258570?seq=1#metadata_info_tab_contents).Tree height is calculated based on an equation from the [FORSKA model](https://books.google.com/books/about/FORSKA_a_General_Forest_Succession_Model.html?id=kyLEtgAACAAJ). Leaf area is calculated as a function of the diameter at clear branch bole height, based on the [Shinozaki pipe model](https://www.researchgate.net/publication/301967992_A_quantitative_analysis_of_plant_form_the_pipe_model_theory_II_Further_evidence_of_the_theory_and_its_application_in_forest_ecology).
+
+ In UVAFME, clear branch bole height is not calculated allometrically but set to an initial value (1.0 m) when a tree is first initialized and then allowed to increase annually (or not) via lower branch thinning. Wood volume (i.e. biomass) is calculated assuming the bole shape is a simple cone. This volume is then multiplied by the bulk density of the wood (a species-specific input parameter) and divided by 2 to derive biomass in tonnes of C. The lateral root volume is assumed to be half of the branch volume, and the root ball volume is calculated by assuming a cone at DBH height downwards to the root depth.
+
+ ## Annual Growth
+
+ Annual tree growth is simulated using the above allometric equations for growth, modified by the current environmental conditions on the plot as well as species- and tree size-specific tolerances. Optimal diameter increment growth (via equation \ref{opt}) is decremented based on soil moisture, temperature, light conditions, nutrient availability, and permafrost conditions (if present). For each of these potential stressors, growth factors are calculated (0 to 1) on a species- and tree-level basis and used to decrement the optimal growth of each tree to derive actual diameter increment growth. For a given plot on a given year, the environmental conditions determine how well each individual tree grows that year. Thus, trees of differing species and sizes will respond differently each year and can compete with one another for resources.
