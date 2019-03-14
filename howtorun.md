@@ -96,4 +96,4 @@ The _UVAFME2018_climate.csv_, _UVAFME2018_climate_stddev.csv_, _UVAFME2018_clima
 
 ## More Information
 
-For a more in depth description of how to modify, compile, and run UVAFME check out the How to Guide on the [UVAFME GitHub page](https://github.com/UVAFME/UVAFME_model).
+For a more in depth description of how to modify, compile, and run UVAFME check out the How To Guide on the [UVAFME GitHub page](https://github.com/UVAFME/UVAFME_model).
