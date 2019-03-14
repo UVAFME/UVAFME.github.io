@@ -20,9 +20,9 @@ Currently, UVAFME sites do not interact with one another and thus may be run in 
 
 Climate and daily weather conditions in UVAFME are the same across all plots within a site, thus each plot experiences the same temperature, precipitation, cloud cover, and PET each simulation day. As of Version 3 of UVAFME, soil conditions within each plot are independent of one another, driven by the plot-wide factors such as climate and input/initial soil conditions, as well as plot-specific factors such as forest cover and disturbances. Additionally, within each plot individual trees are placed on a 30x30 grid, but only interact spatially with one another with respect to insect infestation. Each plot is assumed to be horizontally (but not vertically) homogenous with respect to canopy cover and leaf area, seed rain and seedling banks, as well as soil conditions.
 
-![ClimMount](img/mountain_forest.jpg)
-
 # Climate <a name="climate"></a>
+
+![ClimMount](img/mountain_forest.jpg)
 
 Climate in UVAFME is simulated through input distributions of monthly temperature (ºC), precipitation (cm), and cloud cover (tenths of sky covered). The average monthly minimum and maximum temperatures, precipitation, and cloud cover, as well as standard deviations for these values (generally derived from at least 30 years of historical climate data) are used to create a range of possible values for a site in question. These monthly values are generated anew for each year of the simulation on each site and are equal across all plots within a site.
 
@@ -40,9 +40,9 @@ Daily and annual solar radiation is used to calculate potential evapotranspirati
 ## Potential Evapotranspiration
 In previous versions of UVAFME, top-of-atmosphere radiation was used to calculate potential evapotranspiration (PET) using Hargreave's evaporation formula, however, studies have shown this equation to overestimate PET at high latitudes. In this version of the model, the formulation for PET was updated to use a modified Priestley-Taylor equation which uses surface solar radiation, allowing for the incorporation of topographic effects on PET.
 
-![ForestFloor](img/forest_floor.jpg)
-
 # Soil Processes <a name="soil"></a>
+
+![ForestFloor](img/forest_floor.jpg)
 
 ## Soil Water
 
@@ -63,9 +63,9 @@ The daily depths of freeze and thaw are calculated in the permafrost subroutine 
 
 Moss growth and decay is calculated as in [Bonan and Korzukhin 1989](https://www.jstor.org/stable/20038509?seq=1#metadata_info_tab_contents), where moss growth is modeled as the difference between carbon assimilation and decay/respiration. Carbon assimilation is assumed to be proportional to maximum moss biomass reported for the simulation region, and is modified based on plot conditions such as light conditions, soil moisture, and tree litterfall.
 
-![Allometry](img/UVAFME_TGrowth.png)
-
 # Tree Growth <a name="tgrowth"></a>
+
+![Allometry](img/UVAFME_TGrowth.png)
 
 ## Tree Allometry
 
@@ -79,9 +79,9 @@ Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https
 
  Annual tree growth is simulated using the above allometric equations for growth, modified by the current environmental conditions on the plot as well as species- and tree size-specific tolerances. Optimal diameter increment growth (via equation \ref{opt}) is decremented based on soil moisture, temperature, light conditions, nutrient availability, and permafrost conditions (if present). For each of these potential stressors, growth factors are calculated (0 to 1) on a species- and tree-level basis and used to decrement the optimal growth of each tree to derive actual diameter increment growth. For a given plot on a given year, the environmental conditions determine how well each individual tree grows that year. Thus, trees of differing species and sizes will respond differently each year and can compete with one another for resources.
 
-![TreeMortality](img/forest_mortality.jpg)
-
 # Tree Mortality <a name="tmort"></a>
+
+![TreeMortality](img/forest_mortality.jpg)
 
 Trees in UVAFME may die from stress- or age-related factors or from disturbances by wildfire, windthrow, and [bark beetles](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.2437). Growth stress-related mortality is calculated via prolonged low diameter increment growth. Trees also have a chance of dying each year based on the input species-specific probability of reaching its maximum age.
 
@@ -92,9 +92,10 @@ If a windthrow event occurs on the plot, probability of windthrow mortality of e
 ### Litter
 Trees that die and any annual litter is placed in appropriate genus- and litter type-specific litter cohorts for decomposition. Leaf litter biomass is added to a genus-specific annual litter pool, and twig litter and root litter are added to a twig litter and root litter pool, respectively. Tree boles are separated into small bole litter (DBH < 10 cm) and large bole litter (DBH > 10 cm). If a fire occurs on the plot the litter and humus layers are also consumed, depending on litter and site moisture conditions.
 
+# Tree Regeneration <a name="regen"></a>
+
 ![TreeRegen](img/forest_seedlings.jpg)
 
-# Tree Regeneration <a name="regen"></a>
 Annual establishment of new trees in UVAFME is based on the species-specific seed and seedling banks on each plot as well as the current environmental conditions and species-specific tolerances. Similar to other gap models, the species of each new tree established is stochastic, weighted by each species' ability to survive in the current plot's environment. The seedbank and seedling bank of each species is additionally modified to account for seeding strategies (i.e. serotiny, sprouting etc.) and natural mortality of seeds and seedlings.
 
 Trees in UVAFME are located on a grid (generally 30x30). Currently, trees within the same plot interact spatially with one another with respect to insect infestation. When a new tree is established, its x/y location on the grid is drawn randomly from the set of empty grid spaces on the plot. The tree then carries this same grid cell location throughout its lifetime until its death, at which point that grid cell is once again empty.
