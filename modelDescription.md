@@ -62,11 +62,11 @@ Moss growth and decay is calculated as in [Bonan and Korzukhin 1989](https://www
 
 Tree growth in UVAFME is modeled annually as diameter increment growth, based on first simulating optimal diameter increment growth and subsequently modifying that optimal growth based on environmental conditions and species- and tree size-specific tolerances. Each year the updated diameter is used to calculate other tree characteristics such as height, leaf area, and biomass, using allometric equations.
 
-Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https://www.jstor.org/stable/2258570?seq=1#metadata_info_tab_contents). Tree height is calculated based on an equation from the [FORSKA model](https://books.google.com/books/about/FORSKA_a_General_Forest_Succession_Model.html?id=kyLEtgAACAAJ). Leaf area is calculated as a function of the diameter at clear branch bole height, based on the [Shinozaki pipe model](https://www.researchgate.net/publication/301967992_A_quantitative_analysis_of_plant_form_the_pipe_model_theory_II_Further_evidence_of_the_theory_and_its_application_in_forest_ecology).
+Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https://www.jstor.org/stable/2258570?seq=1#metadata_info_tab_contents) as a function of current tree DBH, and species-specific parameters such as average maximum DBH, height, and age. Tree height is calculated based on an equation from the [FORSKA model](https://books.google.com/books/about/FORSKA_a_General_Forest_Succession_Model.html?id=kyLEtgAACAAJ). Leaf area is calculated as a function of the diameter at clear branch bole height, based on the [Shinozaki pipe model](https://www.researchgate.net/publication/301967992_A_quantitative_analysis_of_plant_form_the_pipe_model_theory_II_Further_evidence_of_the_theory_and_its_application_in_forest_ecology).
 
  In UVAFME, clear branch bole height is not calculated allometrically but set to an initial value (1.0 m) when a tree is first initialized and then allowed to increase annually (or not) via lower branch thinning. Wood volume (i.e. biomass) is calculated assuming the bole shape is a simple cone. This volume is then multiplied by the bulk density of the wood (a species-specific input parameter) and divided by 2 to derive biomass in tonnes of C. The lateral root volume is assumed to be half of the branch volume, and the root ball volume is calculated by assuming a cone at DBH height downwards to the root depth.
 
- ## Annual Growth
+## Annual Growth
 
  Annual tree growth is simulated using the above allometric equations for growth, modified by the current environmental conditions on the plot as well as species- and tree size-specific tolerances. Optimal diameter increment growth (via equation \ref{opt}) is decremented based on soil moisture, temperature, light conditions, nutrient availability, and permafrost conditions (if present). For each of these potential stressors, growth factors are calculated (0 to 1) on a species- and tree-level basis and used to decrement the optimal growth of each tree to derive actual diameter increment growth. For a given plot on a given year, the environmental conditions determine how well each individual tree grows that year. Thus, trees of differing species and sizes will respond differently each year and can compete with one another for resources.
 
@@ -74,4 +74,18 @@ Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https
 
 # Tree Mortality
 
-Trees in UVAFME may die from stress- or age-related factors or from disturbances by wildfire, windthrow, and [bark beetles](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.2437). Currently, fire and windthrow occurrence are probabilistic, based on site-specific input return intervals.
+Trees in UVAFME may die from stress- or age-related factors or from disturbances by wildfire, windthrow, and [bark beetles](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.2437). Growth stress-related mortality is calculated via prolonged low diameter increment growth. Trees also have a chance of dying each year based on the input species-specific probability of reaching its maximum age.
+
+Each plot run for a specific site has a probability of fire or windthrow occurring each year, independent from other plots and other sites. Fire probability is additionally connected to climate via an aridity index. If a fire occurs on a plot, the amount of litter and the moisture conditions on the plot are used to calculate the scorch height and crown scorch and cambial damage-related mortality of each individual tree.
+
+If a windthrow event occurs on the plot, probability of windthrow mortality of each individual tree on the plot is based on tree size. UVAFME is also able to simulate mortality from the spruce beetle (*Dendroctonus rufipennis* (Kirby)), a bark beetle which infests spruce *Picea spp.* species. Mortality is simulated as the probability of infestation of each host tree based on climate-, site-, and tree-level characteristics [(Foster et al. 2018)](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.2437).
+
+## Litter
+Trees that die and any annual litter is placed in appropriate genus- and litter type-specific litter cohorts for decomposition. Leaf litter biomass is added to a genus-specific annual litter pool, and twig litter and root litter are added to a twig litter and root litter pool, respectively. Tree boles are separated into small bole litter (DBH < 10 cm) and large bole litter (DBH > 10 cm). If a fire occurs on the plot the litter and humus layers are also consumed, depending on litter and site moisture conditions.
+
+![TreeRegen](img/forest_seedlings.jpg)
+
+# Tree Regeneration
+Annual establishment of new trees in UVAFME is based on the species-specific seed and seedling banks on each plot as well as the current environmental conditions and species-specific tolerances. Similar to other gap models, the species of each new tree established is stochastic, weighted by each species' ability to survive in the current plot's environment. The seedbank and seedling bank of each species is additionally modified to account for seeding strategies (i.e. serotiny, sprouting etc.) and natural mortality of seeds and seedlings.
+
+Trees in UVAFME are located on a grid (generally 30x30). Currently, trees within the same plot interact spatially with one another with respect to insect infestation. When a new tree is established, its x/y location on the grid is drawn randomly from the set of empty grid spaces on the plot. The tree then carries this same grid cell location throughout its lifetime until its death, at which point that grid cell is once again empty.
