@@ -54,7 +54,7 @@ The daily depths of freeze and thaw are calculated in the permafrost subroutine 
 
 Moss growth and decay is calculated as in [Bonan and Korzukhin 1989](https://www.jstor.org/stable/20038509?seq=1#metadata_info_tab_contents), where moss growth is modeled as the difference between carbon assimilation and decay/respiration. Carbon assimilation is assumed to be proportional to maximum moss biomass reported for the simulation region, and is modified based on plot conditions such as light conditions, soil moisture, and tree litterfall.
 
-![Allometry](img/Tree_Allometry.png)]
+![Allometry](img/Tree_allometry.png)
 
 # Tree Growth
 
