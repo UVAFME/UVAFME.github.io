@@ -93,3 +93,7 @@ This is the only csv file where the column names are explicitly read by UVAFME a
 ### Climate Files
 
 The _UVAFME2018_climate.csv_, _UVAFME2018_climate_stddev.csv_, _UVAFME2018_climate.csv_, and _UVAFME2018_climate_stddev.csv_ files contain the average and standard deviations of monthly precipitation, cloud cover, and minimum and maximum temperature for each site. These data are generally derived from at least 30 years of historical climate data and are used to generate monthly and daily weather within UVAFME.
+
+## More Information
+
+For a more in depth description of how to modify, compile, and run UVAFME check out the How to Guide on the [UVAFME GitHub page](https://github.com/UVAFME/UVAFME_model).

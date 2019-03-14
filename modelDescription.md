@@ -3,7 +3,9 @@ layout: page
 title: Details about UVAFME
 ---
 
-# Jump to a specific topic
+Details about processes within the model can be found below. For an extremely detailed look at all equations and processes within UVAFME check out the User's Manual available on the [UVAFME GitHub page](https://github.com/UVAFME/UVAFME_model).
+
+### Jump to a specific topic
 1. [Scale and Spatial Interaction](#scale)
 2. [Climate](#climate)
 3. [Soil Processes](#soil)
