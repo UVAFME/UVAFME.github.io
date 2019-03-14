@@ -62,8 +62,6 @@ Tree growth in UVAFME is modeled annually as diameter increment growth, based on
 
 Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https://www.jstor.org/stable/2258570?seq=1#metadata_info_tab_contents):
 
-$$
-\delta DBH_{opt} = gDBH\frac{1.0 - \frac{H}{DBH_{max}/H_{max}}}{2.0H + sDBH\text{e}^{\frac{-sDBH}{H_{max} - 1.3}}}
-$$
+\$$ 5 + 5 $$
 
 where $$H$$ is the current tree height (m), $$DBH$$ is the current diameter at breast height (cm), $$H_{max}$$ is the species' average maximum height (m), $$DBH_{max}$$ is the species' average maximum DBH (cm), and $$s$$ and $$g$$ are species-specific growth parameters.
