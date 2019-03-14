@@ -60,8 +60,4 @@ Moss growth and decay is calculated as in [Bonan and Korzukhin 1989](https://www
 
 Tree growth in UVAFME is modeled annually as diameter increment growth, based on first simulating optimal diameter increment growth and subsequently modifying that optimal growth based on environmental conditions and species- and tree size-specific tolerances. Each year the updated diameter is used to calculate other tree characteristics such as height, leaf area, and biomass, using allometric equations.
 
-Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https://www.jstor.org/stable/2258570?seq=1#metadata_info_tab_contents):
-
-$$\delta DBH_{opt} = gDBH\frac{1.0 - \frac{H}{DBH_{max}/H_{max}}}{2.0H + sDBH\text{e}^{\frac{-sDBH}{H_{max} - 1.3}}}$$
-
-where \$$H$$ is the current tree height (m), \$$DBH$$ is the current diameter at breast height (cm), \$$H_{max}$$ is the species' average maximum height (m), \$$DBH_{max}$$ is the species' average maximum DBH (cm), and \$$s$$ and \$$g$$ are species-specific growth parameters.
+Optimal diameter growth of a tree is calculated as in [Botkin et al. 1972](https://www.jstor.org/stable/2258570?seq=1#metadata_info_tab_contents).
