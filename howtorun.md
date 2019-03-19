@@ -4,7 +4,7 @@ title: How to run UVAFME
 subtitle: How to run UVAFME interactively or in batch
 ---
 
-UVAFME is written in Fortran(90), and can be run on a Linux platform, and easily compiled on a Linux system with the [ifort](https://software.intel.com/en-us/fortran-compilers) compiler. Each site simulated in UVAFME is independent from other sites. Thus, when simulating multiple sites, UVAFME runs them in succession. This setup means that UVAFME simulations may be run "interactively" (i.e. from an active command line session), or distributed across several linux nodes via a job manager such as SLURM.
+UVAFME is written in Fortran(90), and can be run on a Linux platform, and easily compiled on a Linux system with the [ifort](https://software.intel.com/en-us/fortran-compilers) compiler. Each site simulated in UVAFME is independent from other sites. Thus, when simulating multiple sites, UVAFME runs them in succession. This setup means that UVAFME simulations may be run "interactively" (i.e. from an active command line session), or distributed across several linux nodes via a job manager such as [SLURM](https://slurm.schedmd.com/).
 
 ## Files Needed for Running UVAFME
 
@@ -39,6 +39,8 @@ you will get an I/O runtime error.
 
 To run UVAFME interactively from the command line simply enter: `./UVAFME.exe file_list.txt`
 
+![RunUVAFME](img/UVAFME_Example.gif)
+
 This will run the model at each site specified in the Sitelist file, in order. Once the
 model has finished running, the output files will be in the output_data directory. These
 output files will be rewritten every time the model is run, so be sure to save them
@@ -46,7 +48,7 @@ elsewhere or with a different name (if desired) before re-running.
 
 As mentioned above, the independence of the UVAFME sites allows for batches of sites to
 be distributed across several nodes of a computing cluster. This can be done manually,
-using different file_list.txt files which point the model to different input/output
+using different *file_list.txt* files which point the model to different input/output
 directories. It can also be accomplished using a job manager such as SLURM. An example
 SLURM script which will submit one job is as follows:
 
@@ -68,7 +70,7 @@ This script can be modified by adding a loop which distributes several jobs (i.e
 
 ### Runtime File
 
-The _UVAFME2018_runtime.txt_ file sets up runtime parameters which are the same across all sites set up in the _UVAFME2018_sitelist.csv_ file. Such parameters include how many plots to simulate per site and their size, the number of years to run the simulations, as well as parameters for implementing climate change. The runtime file is a Fortran namelist file, thus the parameter names in the input runtime file must match the parameter names set up inside the model or an I/O error will occur, and the default values for all subsequent parameters will be used.
+The _UVAFME2018_runtime.txt_ file sets up runtime parameters which are the same across all sites set up in the _UVAFME2018_sitelist.csv_ file. Such parameters include how many plots to simulate per site and their size, the number of years to run the simulations, as well as parameters for implementing climate change. The Runtime file is a [Fortran namelist file](https://docs.oracle.com/cd/E19957-01/805-4939/6j4m0vnc6/index.html), thus the parameter names in the input Runtime file must match the parameter names set up inside the model or an I/O error will occur, and the default values for all subsequent parameters will be used.
 
 ![RuntimeFile](img/UVAFME_Runtime.png)
 
@@ -82,13 +84,13 @@ The _UVAFME2018_specieslist.csv_ file contains the species-level parameters for 
 
 ### Site File
 
-The _UVAFME2018_site.csv_ file contains the site-specific parameters for each site, including latitude and longitude, topography, soil characteristics, disturbance probabilities, and values for modifying temperature and precipitation if the elevation of the site is changed (i.e. climatic lapse rates). As with all the files, the site ids in the **siteID** column must match the site ids in all other files.
+The _UVAFME2018_site.csv_ file contains the site-specific parameters for each site, including latitude and longitude, topography, soil characteristics, disturbance probabilities, and values for modifying temperature and precipitation if the elevation of the site is changed (i.e. climatic lapse rates). As with all the files, the site IDs in the **siteID** column must match the site IDs in all other files.
 
 ### Rangelist File
 
-The _UVAFME2018_rangelist.csv_ file determines which species are eligible for colonization and growth at each site. The column names are the species ids (8-character ids set up in the _UVAFME2018_specieslist.csv_ file), and the rows are each site. If a species is present at a site, the column/row will have a 1, and if the species is absent the column/row will have a 0.
+The _UVAFME2018_rangelist.csv_ file determines which species are eligible for colonization and growth at each site. The column names are the species IDs (8-character IDs set up in the _UVAFME2018_specieslist.csv_ file), and the rows are each site. If a species is present at a site, the column/row will have a 1, and if the species is absent the column/row will have a 0.
 
-This is the only csv file where the column names are explicitly read by UVAFME and must match the species ids as set up in the Specieslist file. The order must also match the order of the Specieslist file.
+This is the only csv file where the column names are explicitly read by UVAFME and must match the species IDs as set up in the Specieslist file. The order must also match the order of the Specieslist file.
 
 ### Climate Files
 
