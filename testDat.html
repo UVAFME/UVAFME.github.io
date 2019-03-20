@@ -3,4 +3,17 @@ layout: page
 title: Test out UVAFME Output
 ---
 
-<iframe src="https://uvafme.shinyapps.io/uvafme_app1/"></iframe>
+<div class="first-row">
+  <p>Some text</p>
+  <p>And some more text</p>
+</div>
+<div class="second-row">
+  <iframe src="https://uvafme.shinyapps.io/uvafme_app1/"></iframe>
+</div>
+
+<style>
+body, html {width: 100%; height: 100%; margin: 0; padding: 0}
+.first-row {position: absolute;top: 0; left: 0; right: 0; height: 100px; background-color: lime;}
+.second-row {position: absolute; top: 100px; left: 0; right: 0; bottom: 0; background-color: red }
+.second-row iframe {display: block; width: 100%; height: 100%; border: none;}
+</style>
