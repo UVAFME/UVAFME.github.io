@@ -112,4 +112,4 @@ Trees in UVAFME are located on a grid (generally 30x30). Currently, trees within
 7. Pastor, J., and W. M. Post. 1985. Development of a linked forest productivity-soil process model. Page 108. Environmental Sciences Division Publication, USDA, Oak Ridge National Laboratory.
 8. Shinozaki, K., K. Yoda, K. Hozumi, and T. Kira. 1964. A quantitative analysis of plant form - the pipe model theory. I. Basic analysis. Japanese Journal of Ecology 14:19–105.
 9. Shugart, H. H., and S. W. Seagle. 1985. Modeling forest landscapes and the role of disturbance in ecosystems and communities. Pages 353–368 in S. T. A. Pickett and P. S. White, editors. The Ecology of Natural Disturbance and Patch Dynamics. Elsevier.
-Yan, X., and H. H. Shugart. 2005. FAREAST: a forest gap model to simulate dynamics and patterns of eastern Eurasian forests: Simulation of eastern Eurasian forests. Journal of Biogeography 32:1641–1658.
+10. Yan, X., and H. H. Shugart. 2005. FAREAST: a forest gap model to simulate dynamics and patterns of eastern Eurasian forests: Simulation of eastern Eurasian forests. Journal of Biogeography 32:1641–1658.
