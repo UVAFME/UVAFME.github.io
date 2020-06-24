@@ -17,7 +17,7 @@ In order to successfully run UVAFME, you must make sure all the necessary files 
 present in the correct directories and with the correct naming system. You must have 
 these files/folders:
 
-1. *UVAFME.exe* - this is the UVAFME executable file for the model
+1. *UVAFME_vx* - this is the UVAFME executable file for the model
 2. *file_list.txt* - this is a text file that tells the model where your input and 
 output directories are
 3. **input_data** - this is the directory that contains all the input files
@@ -40,7 +40,7 @@ you will get an I/O runtime error.
 
 ## Running UVAFME
 
-To run UVAFME interactively from the command line simply enter: `./UVAFME.exe file_list.txt`
+To run UVAFME interactively from the command line simply enter: `./UVAFME_vx file_list.txt`
 
 This will run the model at each site specified in the Sitelist file, in order. Once the 
 model has finished running, the output files will be in the output_data directory. These 
